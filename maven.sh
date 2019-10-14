@@ -6,5 +6,5 @@ sudo tar -xf apache-maven-3.5.4-bin.tar.gz
 sudo mv apache-maven-3.5.4/ apache-maven/
 cd /etc/profile.d/
 sudo vi maven.sh
-sudo chmod +x maven.sh
+sudo chmod +x maven1.sh
 source /etc/profile.d/maven.sh
