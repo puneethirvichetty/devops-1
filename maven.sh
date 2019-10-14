@@ -5,7 +5,6 @@ sudo wget http://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-mave
 sudo tar -xf apache-maven-3.5.4-bin.tar.gz
 sudo mv apache-maven-3.5.4/ apache-maven/
 cd /etc/profile.d/
-sudo vi maven1.sh
 cat > maven1.sh << EOF
 export M2_HOME=/usr/local/src/apache-maven
 export PATH=${M2_HOME}/bin:${PATH}
