@@ -1,5 +1,4 @@
 sudo yum install -y java-1.8.0-openjdk-devel
-sudo yum install git -y
 sudo yum install wget -y
 cd /usr/local/src
 sudo wget http://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
