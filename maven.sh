@@ -6,7 +6,9 @@ sudo tar -xf apache-maven-3.5.4-bin.tar.gz
 sudo mv apache-maven-3.5.4/ apache-maven/
 cd /etc/profile.d/
 sudo vi maven1.sh
-sudo echo 'export M2_HOME=/usr/local/src/apache-maven' >> /etc/profile.d/maven1.sh
-sudo echo 'export PATH=${M2_HOME}/bin:${PATH}' >> /etc/profile.d/maven1.sh
+cat > maven1.sh << EOF
+export M2_HOME=/usr/local/src/apache-maven
+export PATH=${M2_HOME}/bin:${PATH}
+EOF
 sudo chmod +x maven1.sh
 source /etc/profile.d/maven1.sh
