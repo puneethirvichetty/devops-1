@@ -1,3 +1,10 @@
+// Configure the Google Cloud provider
+provider "google" {
+  credentials = "${file("${var.credentials}")}"
+  project     = "${var.gcp_project}"
+  region      = "${var.region}"
+}
+
 //SonarQube Instance
 resource "google_compute_address" "sonarqubeip" {
   name   = "sonarqubeip"
