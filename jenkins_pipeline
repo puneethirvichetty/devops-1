@@ -1,0 +1,24 @@
+node{
+  stage('SCM Checkout'){
+     git credentialsId: 'Mygit-creds', url: 'https://github.com/ashoksanem/jenkins_test'
+    }
+  stage('Mvn Package'){
+      sh label: '', script: 'mvn  clean  package'
+  }
+  
+  stage('SonarQube Analysis') {
+        def mvnHome =  tool name: 'maven-3', type: 'maven'
+        withSonarQubeEnv('sonarqube-server') { 
+          sh "${mvnHome}/bin/mvn sonar:sonar"
+        }
+    }
+  stage('Build Docker Imager'){
+   sh 'sudo docker build -t 35.188.174.237/terraform_cicd/tomcat:1 . '
+  }
+  
+  stage('Push image') {
+     withDockerRegistry(credentialsId: 'harbor-creds', url: 'http://35.188.174.237'){
+       sh label: '', script: 'sudo docker push 35.188.174.237/terraform_cicd/tomcat:1'
+   }
+  }
+}
