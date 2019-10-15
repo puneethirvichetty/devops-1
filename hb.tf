@@ -1,3 +1,9 @@
+provider "google" {
+  credentials = "${file("${var.credentials}")}"
+  project     = "${var.gcp_project}"
+  region      = "${var.region}"
+}
+
 source "google_compute_address" "harborip" {
   name   = "harborip"
   region = "us-east1"
