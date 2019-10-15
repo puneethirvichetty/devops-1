@@ -14,5 +14,14 @@ sudo yum update python*
 sudo docker-compose  -v
 sudo wget -P /opt/ https://storage.googleapis.com/harbor-releases/release-1.9.0/harbor-online-installer-v1.9.0.tgz
 sudo tar -xvf /opt/harbor-online*  -C /opt/
+cat > /etc/docker/daemon.json << EOF
+{
+        "insecure-registries" : ["target"]
+}
+EOF
+cd /
+cd /etc/docker/
+sudo sed -i 's/target/'$harborip'/' daemon.json
+cd /
 sudo sed -i 's/hostname: reg.mydomain.com/hostname: '$harborip'/g'   /opt/harbor/harbor.yml
 sudo  sh  /opt/harbor/install.sh --with-clair
