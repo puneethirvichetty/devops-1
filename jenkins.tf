@@ -36,8 +36,8 @@ resource "google_compute_instance" "jenkins" {
 
 
  network_interface {
-    network    = "${google_compute_network.vpc1.self_link}"
-    subnetwork = "${google_compute_subnetwork.subnet1.self_link}"
+    network    = "${var.sonarvpc}"
+    subnetwork = "${var.sonarsub}"
 
     access_config {
       // Ephemeral IP
@@ -119,44 +119,3 @@ resource "google_compute_instance" "jenkins" {
   # metadata_startup_script = "sudo yum update -y; sudo yum install git -y; sudo git clone https://github.com/iamdaaniyaal/devops.git; sudo chmod 777 *.*; sudo sh jenkins.sh;"
 }
 
-
-//SonarQube Instance
-resource "google_compute_address" "sonarqubeip" {
-  name   = "sonarqubeip"
-  region = "us-east1"
-}
-
-
-resource "google_compute_instance" "sonarqube" {
-  name         = "sonarqube-ashok-abc"
-  machine_type = "n1-standard-1"
-  zone         = "us-east1-b"
-
-  tags = ["name", "sonarqube", "http-server"]
-
-  boot_disk {
-    initialize_params {
-      image = "centos-7-v20180129"
-    }
-  }
-
-  // Local SSD disk
-  #scratch_disk {
-  #}
-
-  network_interface {
-    network    = "${google_compute_network.vpc1.self_link}"
-    subnetwork = "${google_compute_subnetwork.subnet1.self_link}"
-
-
-    access_config {
-      // Ephemeral IP
-      nat_ip = "${google_compute_address.sonarqubeip.address}"
-    }
-  }
-  metadata = {
-    name = "sonarqube"
-  }
-
-  metadata_startup_script = "sudo yum update -y;sudo yum install git -y; sudo git clone https://github.com/iamdaaniyaal/devops.git; sudo chmod 777 /devops/*; sudo sh sonarqube.sh;"
-}
