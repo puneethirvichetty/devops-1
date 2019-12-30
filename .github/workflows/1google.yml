@@ -23,6 +23,7 @@ env:
   GKE_ZONE: us-west1-a
   GKE_CLUSTER: example-gke-cluster
   IMAGE: gke-test
+  CLOUDSDK_PYTHON_SITEPACKAGES: 1  
 
 jobs:
   setup-build-publish-deploy:
